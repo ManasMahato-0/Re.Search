@@ -130,6 +130,7 @@ __pypackages__/
 # Celery stuff
 celerybeat-schedule
 celerybeat.pid
+.claude
 
 # Redis
 *.rdb
@@ -216,3 +217,13 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Generated search indexes
+backend/vector_index.faiss
+backend/bm25_index.pkl
+
+# Crawler dataset (too large for GitHub)
+backend/data/crawler_dataset.jsonl
+
+# Python cache
+backend/__pycache__/
