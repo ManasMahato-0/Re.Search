@@ -1,18 +1,3 @@
-"""
-Eval harness: run labeled queries through the search pipeline, score results.
-
-Usage (from backend/ so index paths resolve):
-    cd backend
-    python ../eval/run_eval.py                 # run + score
-    python ../eval/run_eval.py --tag baseline  # save scores under a tag
-
-Metrics:
-    nDCG@10   - ranking quality of final (reranked) results
-    MRR@10    - reciprocal rank of first relevant result
-    recall@30 - did relevant doc survive retrieval+fusion (pre-rerank pool)
-
-Imports the pipeline directly from main.py — no server needed.
-"""
 
 import argparse
 import json
