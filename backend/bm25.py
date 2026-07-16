@@ -16,7 +16,6 @@ this to was were will with what which how when where who why
 
 
 def tokenize(text: str) -> list[str]:
-    """Lowercase, strip punctuation, split into words, drop stopwords."""
     return [t for t in _TOKEN_RE.findall(text.lower()) if t not in STOPWORDS]
 
 

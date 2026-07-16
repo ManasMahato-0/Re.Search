@@ -4,7 +4,7 @@ import os
 import json
 import math
 import pickle
-
+import re
 import faiss
 import numpy as np
 from sentence_transformers import SentenceTransformer
@@ -27,7 +27,30 @@ CHUNK_OVERLAP = 50
 TITLE_WEIGHT = 3
 
 MODEL_NAME = "BAAI/bge-small-en-v1.5"
-EMBED_BATCH_SIZE = 64
+import torch
+EMBED_BATCH_SIZE = 256 if torch.cuda.is_available() else 64
+
+
+import re
+
+# Nav/boilerplate phrases
+NAV_PHRASES = [
+    "skip to main content", "skip to content", "skip to search",
+    "skip navigation links", "skip to docs navigation",
+    "table of contents", "edit on github", "view on github",
+    "create account", "log in", "sign in", "toggle navigation",
+    "light mode", "dark mode", "back to top",
+    "read in english", "keyboard shortcuts",
+]
+
+def clean_boilerplate(text: str, title: str) -> str:
+    t = text
+    tl = title.strip()
+    while tl and t.lower().startswith(tl.lower()):
+        t = t[len(tl):].lstrip(" |-·—>:.")
+    for phrase in NAV_PHRASES:
+        t = re.sub(re.escape(phrase), " ", t, flags=re.IGNORECASE)
+    return re.sub(r"\s+", " ", t).strip()
 
 
 # ---------------------------------------------------------
@@ -53,10 +76,10 @@ for file_path in DATA_FILES:
             except json.JSONDecodeError:
                 continue  
             url = doc.get("url", "#")
-            text = doc.get("text_content", "").strip()
+            text = clean_boilerplate(doc.get("text_content", "").strip(), doc.get("title", ""))
 
             # Skip near-empty pages (nav-only pages, error pages, etc.)
-            if len(text) < 50:
+            if len(text) < 200:
                 continue
             # Skip duplicates of a URL we've already ingested
             if url in seen_urls:
@@ -125,10 +148,13 @@ with open("bm25_index.pkl", "wb") as f:
 # ---------------------------------------------------------
 print(f"Loading embedding model ({MODEL_NAME})...")
 model = SentenceTransformer(MODEL_NAME)
+print(f"Embedding device: {model.device} (batch size {EMBED_BATCH_SIZE})")
 
 
 dimension = model.get_embedding_dimension() 
-faiss_index = faiss.IndexFlatIP(dimension)
+faiss_index = faiss.IndexHNSWFlat(dimension, 32, faiss.METRIC_INNER_PRODUCT)
+faiss_index.hnsw.efSearch = 64
+
 
 print("Embedding chunks (batched to keep memory flat)...")
 total_batches = math.ceil(len(chunk_texts) / EMBED_BATCH_SIZE)

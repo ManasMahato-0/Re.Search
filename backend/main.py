@@ -54,7 +54,7 @@ model = SentenceTransformer("BAAI/bge-small-en-v1.5")
 BGE_QUERY_PREFIX = "Represent this sentence for searching relevant passages: "
 
 
-reranker = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
+reranker = CrossEncoder("BAAI/bge-reranker-base")
 
 print("Server initialization complete. Ready to serve traffic.")
 
@@ -81,14 +81,7 @@ def reciprocal_rank_fusion(bm25_rankings, faiss_rankings, k=RRF_K):
 # QUERY-AWARE SNIPPETS
 # ---------------------------------------------------------
 def make_snippet(chunk_text: str, query: str, width: int = 200) -> str:
-    """
-    Show the user the part of the chunk that actually matched the query,
-    instead of blindly taking the first 200 characters (which was usually
-    the page header / nav text and looked identical for every result).
-
-    Strategy: find the first occurrence of any query word in the chunk and
-    center a `width`-character window on it.
-    """
+    
     query_words = tokenize(query)
     lower_text = chunk_text.lower()
 
