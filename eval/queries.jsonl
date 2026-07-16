@@ -1,0 +1,63 @@
+{"qid": "doc_01", "query": "how do closures capture variables in rust", "relevant_urls": ["https://doc.rust-lang.org/book/ch13-01-closures.html"]}
+{"qid": "doc_02", "query": "kubernetes getting started installation options", "relevant_urls": ["https://kubernetes.io/docs/setup/"]}
+{"qid": "doc_03", "query": "express js response object methods", "relevant_urls": ["https://expressjs.com/en/5x/api/response/"]}
+{"qid": "doc_04", "query": "continue statement in c++ loops", "relevant_urls": ["https://en.cppreference.com/cpp/language/continue"]}
+{"qid": "doc_05", "query": "configure linux core dump settings", "relevant_urls": ["https://man7.org/linux/man-pages/man5/coredump.conf.5.html"]}
+{"qid": "doc_06", "query": "bootstrap form validation feedback messages", "relevant_urls": ["https://getbootstrap.com/docs/5.3/forms/validation/"]}
+{"qid": "doc_07", "query": "root mean squared logarithmic error scikit-learn", "relevant_urls": ["https://scikit-learn.org/stable/modules/generated/sklearn.metrics.root_mean_squared_log_error.html"]}
+{"qid": "doc_08", "query": "list of named colors in CSS", "relevant_urls": ["https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/named-color"]}
+{"qid": "doc_09", "query": "what is an AWS account", "relevant_urls": ["https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html"]}
+{"qid": "doc_10", "query": "how to create a repository on github", "relevant_urls": ["https://docs.github.com/en/repositories/creating-and-managing-repositories"]}
+{"qid": "doc_11", "query": "gitlab comment on issues by replying to email", "relevant_urls": ["https://docs.gitlab.com/administration/reply_by_email/"]}
+{"qid": "doc_12", "query": "tensorflow dataset reading lines from text file", "relevant_urls": ["https://www.tensorflow.org/api_docs/python/tf/data/TextLineDataset"]}
+{"qid": "doc_13", "query": "azure firewall policy analytics rule insights", "relevant_urls": ["https://learn.microsoft.com/en-us/azure/firewall/policy-analytics"]}
+{"qid": "doc_14", "query": "python3 compatibility in ansible jinja templates", "relevant_urls": ["https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_python_version.html"]}
+{"qid": "doc_15", "query": "cloudflare http headers added to requests", "relevant_urls": ["https://developers.cloudflare.com/fundamentals/reference/http-headers/"]}
+{"qid": "doc_16", "query": "helm command to show all chart information", "relevant_urls": ["https://helm.sh/de/docs/helm/helm_show_all/"]}
+{"qid": "doc_17", "query": "ruby math module trigonometric functions", "relevant_urls": ["https://ruby-doc.org/core-1.8.6/Math.html"]}
+{"qid": "doc_18", "query": "fastapi test client for testing endpoints", "relevant_urls": ["https://fastapi.tiangolo.com/zh/reference/testclient/"]}
+{"qid": "doc_19", "query": "angular router state snapshot api", "relevant_urls": ["https://angular.dev/api/router/RouterStateSnapshot"]}
+{"qid": "doc_20", "query": "use your own LLM model in github copilot", "relevant_urls": ["https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/github-copilot-app/use-byok-models"]}
+{"qid": "doc_21", "query": "systemd pcrlock TPM policy", "relevant_urls": ["https://man7.org/linux/man-pages/man8/systemd-pcrlock-make-policy.service.8.html"]}
+{"qid": "doc_22", "query": "java memory usage threshold notification", "relevant_urls": ["https://docs.oracle.com/javase/8/docs/api/java/lang/management/MemoryNotificationInfo.html"]}
+{"qid": "doc_23", "query": "c++ chrono timezone database", "relevant_urls": ["https://en.cppreference.com/cpp/chrono/tzdb"]}
+{"qid": "doc_24", "query": "prepare environment for recaptcha google cloud", "relevant_urls": ["https://docs.cloud.google.com/recaptcha/docs/prepare-environment"]}
+{"qid": "doc_25", "query": "tensorflow random jpeg quality image augmentation", "relevant_urls": ["https://www.tensorflow.org/api_docs/python/tf/image/stateless_random_jpeg_quality"]}
+{"qid": "paper_01", "query": "scalable content addressable network distributed hash table", "relevant_urls": ["https://openalex.org/W2163059190"]}
+{"qid": "paper_02", "query": "dragon book compilers principles and techniques", "relevant_urls": ["https://openalex.org/W1491178396"]}
+{"qid": "paper_03", "query": "global average pooling for discriminative localization class activation", "relevant_urls": ["https://openalex.org/W2295107390"]}
+{"qid": "paper_04", "query": "model merging as probabilistic inference in parameter space", "relevant_urls": ["http://arxiv.org/abs/2607.01689v1"]}
+{"qid": "paper_05", "query": "client drift in federated learning spectral perturbation", "relevant_urls": ["http://arxiv.org/abs/2607.04170v1"]}
+{"qid": "paper_06", "query": "RSV disease burden in older adults england", "relevant_urls": ["https://doi.org/10.1101/2025.04.17.25325639"]}
+{"qid": "paper_07", "query": "understanding camera movement descriptions for video generation", "relevant_urls": ["http://arxiv.org/abs/2607.03043v1"]}
+{"qid": "paper_08", "query": "socially aware robot navigation using human skeletal cues", "relevant_urls": ["http://arxiv.org/abs/2607.07357v1"]}
+{"qid": "paper_09", "query": "canonical ensemble sampling velocity rescaling thermostat", "relevant_urls": ["https://openalex.org/W2057477511"]}
+{"qid": "paper_10", "query": "how fast do plastics degrade in the environment", "relevant_urls": ["https://openalex.org/W3005332201"]}
+{"qid": "paper_11", "query": "hedonic versus eudaimonic well-being research review", "relevant_urls": ["https://openalex.org/W2127259621"]}
+{"qid": "paper_12", "query": "defining mixed methods research", "relevant_urls": ["https://openalex.org/W2165935007"]}
+{"qid": "paper_13", "query": "akaike information criterion multimodel inference", "relevant_urls": ["https://openalex.org/W2158196600"]}
+{"qid": "paper_14", "query": "costs and benefits of ownership vertical integration theory", "relevant_urls": ["https://openalex.org/W2117455041"]}
+{"qid": "paper_15", "query": "why is a diagram worth ten thousand words", "relevant_urls": ["https://openalex.org/W1990100773"]}
+{"qid": "paper_16", "query": "zero textures neutrino mass matrix oscillation constraints", "relevant_urls": ["http://arxiv.org/abs/2607.08384v1"]}
+{"qid": "paper_17", "query": "genome wide association study oral cancer india", "relevant_urls": ["https://doi.org/10.1101/2025.04.16.25325815"]}
+{"qid": "paper_18", "query": "covid vaccine effectiveness against JN.1 hospitalisation", "relevant_urls": ["https://doi.org/10.1101/2025.05.02.25326904"]}
+{"qid": "paper_19", "query": "metatarsal bone stress injury in runners", "relevant_urls": ["https://doi.org/10.1101/2025.03.04.25323333"]}
+{"qid": "paper_20", "query": "LLM flight planning with RAG memory for eVTOL", "relevant_urls": ["http://arxiv.org/abs/2607.06964v1"]}
+{"qid": "wiki_01", "query": "DPLL algorithm boolean satisfiability", "relevant_urls": ["https://en.wikipedia.org/?curid=2745094"]}
+{"qid": "wiki_02", "query": "moravec's paradox easy for humans hard for computers", "relevant_urls": ["https://en.wikipedia.org/?curid=12476035"]}
+{"qid": "wiki_03", "query": "mcculloch pitts logical calculus of nervous activity", "relevant_urls": ["https://en.wikipedia.org/?curid=78113392"]}
+{"qid": "wiki_04", "query": "brain implant neural device", "relevant_urls": ["https://en.wikipedia.org/?curid=1894504"]}
+{"qid": "wiki_05", "query": "licklider psychologist computer scientist man-computer symbiosis", "relevant_urls": ["https://en.wikipedia.org/?curid=254150"]}
+{"qid": "wiki_06", "query": "gordon pask cybernetics conversation theory", "relevant_urls": ["https://en.wikipedia.org/?curid=4848621"]}
+{"qid": "wiki_07", "query": "what is open collaboration", "relevant_urls": ["https://en.wikipedia.org/?curid=41844429"]}
+{"qid": "wiki_08", "query": "google developer expert program", "relevant_urls": ["https://en.wikipedia.org/?curid=42688812"]}
+{"qid": "wiki_09", "query": "MIT 100k entrepreneurship competition", "relevant_urls": ["https://en.wikipedia.org/?curid=30865307"]}
+{"qid": "wiki_10", "query": "kanaka rajan computational neuroscientist", "relevant_urls": ["https://en.wikipedia.org/?curid=63942267"]}
+{"qid": "rfc_01", "query": "authenticated denial of existence in DNS", "relevant_urls": ["https://datatracker.ietf.org/doc/rfc7129/"]}
+{"qid": "rfc_02", "query": "RDAP object tagging authoritative server", "relevant_urls": ["https://datatracker.ietf.org/doc/rfc8521/"]}
+{"qid": "rfc_03", "query": "YANG modules for TCP client and server configuration", "relevant_urls": ["https://datatracker.ietf.org/doc/rfc9643/"]}
+{"qid": "rfc_04", "query": "EAP identity selection hints access network", "relevant_urls": ["https://datatracker.ietf.org/doc/rfc4284/"]}
+{"qid": "rfc_05", "query": "realm specific IP protocol specification", "relevant_urls": ["https://datatracker.ietf.org/doc/rfc3103/"]}
+{"qid": "rfc_06", "query": "router advertisement flag for DHCPv6 prefix delegation", "relevant_urls": ["https://datatracker.ietf.org/doc/rfc9762/"]}
+{"qid": "rfc_07", "query": "rapid acquisition of multicast RTP sessions", "relevant_urls": ["https://datatracker.ietf.org/doc/rfc6659/"]}
+{"qid": "rfc_08", "query": "URN namespace for sources of law", "relevant_urls": ["https://datatracker.ietf.org/doc/rfc9676/"]}

@@ -118,17 +118,22 @@ def make_snippet(chunk_text: str, query: str, width: int = 200) -> str:
 
 
 # ---------------------------------------------------------
-# SEARCH ENDPOINT
+# SEARCH PIPELINE (shared by the API endpoint and eval harness)
 # ---------------------------------------------------------
-@app.get("/search")
-def search(q: str = Query(..., min_length=1)):
+def run_search(q: str, final_k: int = FINAL_RESULTS):
+    """
+    Full retrieval pipeline. Returns (results, candidate_urls):
+      results        — reranked top `final_k` docs (title/url/snippet/score)
+      candidate_urls — URLs of ALL fused candidates before reranking,
+                       in fused order (used by eval to measure recall)
+    """
     # 1. LEXICAL: BM25 over all chunks ---
     bm25_scores = bm25_engine.get_scores(q)
     valid = [i for i, s in enumerate(bm25_scores) if s > 0]
     bm25_ranked = sorted(valid, key=lambda i: bm25_scores[i], reverse=True)[:TOP_K_POOL]
 
     # 2. SEMANTIC: FAISS cosine search ---
-    
+
     query_vector = model.encode(
         [BGE_QUERY_PREFIX + q], normalize_embeddings=True
     ).astype("float32")
@@ -145,8 +150,8 @@ def search(q: str = Query(..., min_length=1)):
     # 3. FUSE the two ranked lists  ---
     fused = reciprocal_rank_fusion(bm25_ranked, faiss_ranked)
 
-    # 4. COLLAPSE chunks 
-    doc_best_chunk = {}   
+    # 4. COLLAPSE chunks
+    doc_best_chunk = {}
     for chunk_idx, rrf_score in fused:
         doc_idx = chunk_to_doc[chunk_idx]
         if doc_idx not in doc_best_chunk:
@@ -158,11 +163,12 @@ def search(q: str = Query(..., min_length=1)):
         {"doc_idx": d, "chunk_idx": c, "rrf_score": s}
         for d, (c, s) in doc_best_chunk.items()
     ]
+    candidate_urls = [documents[c["doc_idx"]].get("url", "#") for c in candidates]
 
     if not candidates:
-        return {"status": "success", "query": q, "results": []}
+        return [], []
 
-    # 5. RERANK with the cross-encoder 
+    # 5. RERANK with the cross-encoder
     pairs = [(q, chunk_texts[c["chunk_idx"]]) for c in candidates]
     rerank_scores = reranker.predict(pairs)
     for cand, score in zip(candidates, rerank_scores):
@@ -170,9 +176,9 @@ def search(q: str = Query(..., min_length=1)):
 
     candidates.sort(key=lambda c: c["rerank_score"], reverse=True)
 
-    # 6. BUILD the response 
+    # 6. BUILD the response
     top_results = []
-    for cand in candidates[:FINAL_RESULTS]:
+    for cand in candidates[:final_k]:
         doc = documents[cand["doc_idx"]]
         chunk_text = chunk_texts[cand["chunk_idx"]]
         top_results.append({
@@ -182,6 +188,15 @@ def search(q: str = Query(..., min_length=1)):
             "score": round(cand["rerank_score"], 4),
         })
 
+    return top_results, candidate_urls
+
+
+# ---------------------------------------------------------
+# SEARCH ENDPOINT
+# ---------------------------------------------------------
+@app.get("/search")
+def search(q: str = Query(..., min_length=1)):
+    top_results, _ = run_search(q)
     return {
         "status": "success",
         "query": q,
