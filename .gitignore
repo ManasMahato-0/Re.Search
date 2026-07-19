@@ -227,3 +227,4 @@ backend/data/crawler_dataset.jsonl
 
 # Python cache
 backend/__pycache__/
+backend/expansion_cache.json

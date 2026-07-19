@@ -1,0 +1,196 @@
+{
+  "tag": "cos040",
+  "timestamp": "20260718_170241",
+  "summary": {
+    "nDCG@10": 0.6147907799574857,
+    "MRR@10": 0.5558333333333334,
+    "recall@30": 0.85,
+    "latency_ms": {
+      "p50": 920.1,
+      "p95": 1406.3,
+      "max": 1406.3
+    }
+  },
+  "per_query": [
+    {
+      "qid": "hard_01",
+      "query": "rust closures",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 1406.3,
+      "top_url": "https://doc.rust-lang.org/book/ch13-01-closures.html"
+    },
+    {
+      "qid": "hard_02",
+      "query": "kubernets setup",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 768.3,
+      "top_url": "https://kubernetes.io/docs/setup/"
+    },
+    {
+      "qid": "hard_03",
+      "query": "res.send res.json express",
+      "ndcg": 0.4911492931622974,
+      "mrr": 0.3333333333333333,
+      "recall": 1.0,
+      "ms": 939.7,
+      "top_url": "https://expressjs.com/en/advanced/security-updates/"
+    },
+    {
+      "qid": "hard_04",
+      "query": "skip loop iteration c++",
+      "ndcg": 0.43067655807339306,
+      "mrr": 0.25,
+      "recall": 1.0,
+      "ms": 952.5,
+      "top_url": "https://www.elastic.co/docs/explore-analyze/workflows/steps"
+    },
+    {
+      "qid": "hard_05",
+      "query": "core dumps linux",
+      "ndcg": 0.3562071871080222,
+      "mrr": 0.16666666666666666,
+      "recall": 1.0,
+      "ms": 893.5,
+      "top_url": "https://man7.org/linux/man-pages/man8/systemd-coredump@.service.8.html"
+    },
+    {
+      "qid": "hard_06",
+      "query": "css color names",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 905.0,
+      "top_url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/named-color"
+    },
+    {
+      "qid": "hard_07",
+      "query": "make repo github",
+      "ndcg": 0.5,
+      "mrr": 0.3333333333333333,
+      "recall": 1.0,
+      "ms": 903.8,
+      "top_url": "https://docs.netlify.com/build/git-workflows/create-a-repo-from-netlify/"
+    },
+    {
+      "qid": "hard_08",
+      "query": "test fastapi app without server",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 1002.2,
+      "top_url": "https://fastapi.tiangolo.com/zh/reference/testclient/"
+    },
+    {
+      "qid": "hard_09",
+      "query": "rmsle metric",
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "recall": 0.0,
+      "ms": 864.7,
+      "top_url": "https://xgboost.readthedocs.io/en/stable/_downloads/7c7d3c29270ada44c0b88e9e47bf0f25/custom_rmsle.py"
+    },
+    {
+      "qid": "hard_10",
+      "query": "what headers does cloudflare add",
+      "ndcg": 0.6309297535714575,
+      "mrr": 0.5,
+      "recall": 1.0,
+      "ms": 920.1,
+      "top_url": "https://developers.cloudflare.com/dns/proxy-status/use-cases/"
+    },
+    {
+      "qid": "hard_11",
+      "query": "distrbuted hash table paper",
+      "ndcg": 0.5,
+      "mrr": 0.3333333333333333,
+      "recall": 1.0,
+      "ms": 939.2,
+      "top_url": "https://www.postgresql.org/docs/15/sql-createtable.html"
+    },
+    {
+      "qid": "hard_12",
+      "query": "CAM class activation maps",
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "recall": 0.0,
+      "ms": 969.3,
+      "top_url": "https://openalex.org/W2962858109"
+    },
+    {
+      "qid": "hard_13",
+      "query": "federated learning heterogeneity",
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "recall": 1.0,
+      "ms": 799.1,
+      "top_url": "https://en.wikipedia.org/?curid=60992857"
+    },
+    {
+      "qid": "hard_14",
+      "query": "plastic decomposition rates",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 865.5,
+      "top_url": "https://openalex.org/W3005332201"
+    },
+    {
+      "qid": "hard_15",
+      "query": "AIC model selection",
+      "ndcg": 0.38685280723454163,
+      "mrr": 0.2,
+      "recall": 1.0,
+      "ms": 952.2,
+      "top_url": "https://openalex.org/W1981903823"
+    },
+    {
+      "qid": "hard_16",
+      "query": "SAT solver backtracking algorithm",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 948.7,
+      "top_url": "https://en.wikipedia.org/?curid=2745094"
+    },
+    {
+      "qid": "hard_17",
+      "query": "why robots bad at easy things",
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "recall": 0.0,
+      "ms": 832.1,
+      "top_url": "https://en.wikipedia.org/?curid=8434470"
+    },
+    {
+      "qid": "hard_18",
+      "query": "neural implants",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 730.4,
+      "top_url": "https://en.wikipedia.org/?curid=1894504"
+    },
+    {
+      "qid": "hard_19",
+      "query": "dns prove domain doesnt exist",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 861.7,
+      "top_url": "https://datatracker.ietf.org/doc/rfc7129/"
+    },
+    {
+      "qid": "hard_20",
+      "query": "dhcpv6 prefix delegation router advertisment",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 965.9,
+      "top_url": "https://datatracker.ietf.org/doc/rfc9762/"
+    }
+  ]
+}

@@ -1,0 +1,583 @@
+{
+  "tag": "easy-latency",
+  "timestamp": "20260716_213004",
+  "summary": {
+    "nDCG@10": 0.9362629482450237,
+    "MRR@10": 0.9153439153439153,
+    "recall@30": 1.0,
+    "latency_ms": {
+      "p50": 926.5,
+      "p95": 1064.9,
+      "max": 1560.4
+    }
+  },
+  "per_query": [
+    {
+      "qid": "doc_01",
+      "query": "how do closures capture variables in rust",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 1560.4,
+      "top_url": "https://doc.rust-lang.org/book/ch13-01-closures.html"
+    },
+    {
+      "qid": "doc_02",
+      "query": "kubernetes getting started installation options",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 861.5,
+      "top_url": "https://kubernetes.io/docs/setup/"
+    },
+    {
+      "qid": "doc_03",
+      "query": "express js response object methods",
+      "ndcg": 0.5,
+      "mrr": 0.3333333333333333,
+      "recall": 1.0,
+      "ms": 937.7,
+      "top_url": "https://expressjs.com/en/4x/api/response/"
+    },
+    {
+      "qid": "doc_04",
+      "query": "continue statement in c++ loops",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 849.2,
+      "top_url": "https://en.cppreference.com/cpp/language/continue"
+    },
+    {
+      "qid": "doc_05",
+      "query": "configure linux core dump settings",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 929.4,
+      "top_url": "https://man7.org/linux/man-pages/man5/coredump.conf.5.html"
+    },
+    {
+      "qid": "doc_06",
+      "query": "bootstrap form validation feedback messages",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 920.0,
+      "top_url": "https://getbootstrap.com/docs/5.3/forms/validation/"
+    },
+    {
+      "qid": "doc_07",
+      "query": "root mean squared logarithmic error scikit-learn",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 1022.3,
+      "top_url": "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.root_mean_squared_log_error.html"
+    },
+    {
+      "qid": "doc_08",
+      "query": "list of named colors in CSS",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 913.1,
+      "top_url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/named-color"
+    },
+    {
+      "qid": "doc_09",
+      "query": "what is an AWS account",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 818.7,
+      "top_url": "https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html"
+    },
+    {
+      "qid": "doc_10",
+      "query": "how to create a repository on github",
+      "ndcg": 0.43067655807339306,
+      "mrr": 0.25,
+      "recall": 1.0,
+      "ms": 662.5,
+      "top_url": "https://docs.github.com/en/repositories/creating-and-managing-repositories/quickstart-for-repositories"
+    },
+    {
+      "qid": "doc_11",
+      "query": "gitlab comment on issues by replying to email",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 908.6,
+      "top_url": "https://docs.gitlab.com/administration/reply_by_email/"
+    },
+    {
+      "qid": "doc_12",
+      "query": "tensorflow dataset reading lines from text file",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 983.4,
+      "top_url": "https://www.tensorflow.org/api_docs/python/tf/data/TextLineDataset"
+    },
+    {
+      "qid": "doc_13",
+      "query": "azure firewall policy analytics rule insights",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 987.5,
+      "top_url": "https://learn.microsoft.com/en-us/azure/firewall/policy-analytics"
+    },
+    {
+      "qid": "doc_14",
+      "query": "python3 compatibility in ansible jinja templates",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 924.2,
+      "top_url": "https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_python_version.html"
+    },
+    {
+      "qid": "doc_15",
+      "query": "cloudflare http headers added to requests",
+      "ndcg": 0.6309297535714575,
+      "mrr": 0.5,
+      "recall": 1.0,
+      "ms": 959.4,
+      "top_url": "https://developers.cloudflare.com/dns/proxy-status/use-cases/"
+    },
+    {
+      "qid": "doc_16",
+      "query": "helm command to show all chart information",
+      "ndcg": 0.43067655807339306,
+      "mrr": 0.25,
+      "recall": 1.0,
+      "ms": 847.0,
+      "top_url": "https://helm.sh/ja/docs/v3/helm/helm_show_all/"
+    },
+    {
+      "qid": "doc_17",
+      "query": "ruby math module trigonometric functions",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 972.5,
+      "top_url": "https://ruby-doc.org/core-1.8.6/Math.html"
+    },
+    {
+      "qid": "doc_18",
+      "query": "fastapi test client for testing endpoints",
+      "ndcg": 0.43067655807339306,
+      "mrr": 0.25,
+      "recall": 1.0,
+      "ms": 983.9,
+      "top_url": "https://fastapi.tiangolo.com/zh-hant/tutorial/testing/"
+    },
+    {
+      "qid": "doc_19",
+      "query": "angular router state snapshot api",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 1002.0,
+      "top_url": "https://angular.dev/api/router/RouterStateSnapshot"
+    },
+    {
+      "qid": "doc_20",
+      "query": "use your own LLM model in github copilot",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 1044.3,
+      "top_url": "https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/github-copilot-app/use-byok-models"
+    },
+    {
+      "qid": "doc_21",
+      "query": "systemd pcrlock TPM policy",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 909.5,
+      "top_url": "https://man7.org/linux/man-pages/man8/systemd-pcrlock-make-policy.service.8.html"
+    },
+    {
+      "qid": "doc_22",
+      "query": "java memory usage threshold notification",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 996.8,
+      "top_url": "https://docs.oracle.com/javase/8/docs/api/java/lang/management/MemoryNotificationInfo.html"
+    },
+    {
+      "qid": "doc_23",
+      "query": "c++ chrono timezone database",
+      "ndcg": 0.43067655807339306,
+      "mrr": 0.25,
+      "recall": 1.0,
+      "ms": 957.8,
+      "top_url": "https://en.cppreference.com/cpp/chrono/tzdb_functions"
+    },
+    {
+      "qid": "doc_24",
+      "query": "prepare environment for recaptcha google cloud",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 996.0,
+      "top_url": "https://docs.cloud.google.com/recaptcha/docs/prepare-environment"
+    },
+    {
+      "qid": "doc_25",
+      "query": "tensorflow random jpeg quality image augmentation",
+      "ndcg": 0.5,
+      "mrr": 0.3333333333333333,
+      "recall": 1.0,
+      "ms": 1015.7,
+      "top_url": "https://www.tensorflow.org/api_docs/python/tf/image/random_jpeg_quality"
+    },
+    {
+      "qid": "paper_01",
+      "query": "scalable content addressable network distributed hash table",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 922.8,
+      "top_url": "https://openalex.org/W2163059190"
+    },
+    {
+      "qid": "paper_02",
+      "query": "dragon book compilers principles and techniques",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 817.8,
+      "top_url": "https://openalex.org/W1491178396"
+    },
+    {
+      "qid": "paper_03",
+      "query": "global average pooling for discriminative localization class activation",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 1086.9,
+      "top_url": "https://openalex.org/W2295107390"
+    },
+    {
+      "qid": "paper_04",
+      "query": "model merging as probabilistic inference in parameter space",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 965.1,
+      "top_url": "http://arxiv.org/abs/2607.01689v1"
+    },
+    {
+      "qid": "paper_05",
+      "query": "client drift in federated learning spectral perturbation",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 852.5,
+      "top_url": "http://arxiv.org/abs/2607.04170v1"
+    },
+    {
+      "qid": "paper_06",
+      "query": "RSV disease burden in older adults england",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 900.5,
+      "top_url": "https://doi.org/10.1101/2025.04.17.25325639"
+    },
+    {
+      "qid": "paper_07",
+      "query": "understanding camera movement descriptions for video generation",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 890.0,
+      "top_url": "http://arxiv.org/abs/2607.03043v1"
+    },
+    {
+      "qid": "paper_08",
+      "query": "socially aware robot navigation using human skeletal cues",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 935.7,
+      "top_url": "http://arxiv.org/abs/2607.07357v1"
+    },
+    {
+      "qid": "paper_09",
+      "query": "canonical ensemble sampling velocity rescaling thermostat",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 980.4,
+      "top_url": "https://openalex.org/W2057477511"
+    },
+    {
+      "qid": "paper_10",
+      "query": "how fast do plastics degrade in the environment",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 830.2,
+      "top_url": "https://openalex.org/W3005332201"
+    },
+    {
+      "qid": "paper_11",
+      "query": "hedonic versus eudaimonic well-being research review",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 837.0,
+      "top_url": "https://openalex.org/W2127259621"
+    },
+    {
+      "qid": "paper_12",
+      "query": "defining mixed methods research",
+      "ndcg": 0.6309297535714575,
+      "mrr": 0.5,
+      "recall": 1.0,
+      "ms": 843.9,
+      "top_url": "https://openalex.org/W2122838852"
+    },
+    {
+      "qid": "paper_13",
+      "query": "akaike information criterion multimodel inference",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 961.9,
+      "top_url": "https://openalex.org/W2158196600"
+    },
+    {
+      "qid": "paper_14",
+      "query": "costs and benefits of ownership vertical integration theory",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 812.4,
+      "top_url": "https://openalex.org/W2117455041"
+    },
+    {
+      "qid": "paper_15",
+      "query": "why is a diagram worth ten thousand words",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 862.2,
+      "top_url": "https://openalex.org/W1990100773"
+    },
+    {
+      "qid": "paper_16",
+      "query": "zero textures neutrino mass matrix oscillation constraints",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 1064.9,
+      "top_url": "http://arxiv.org/abs/2607.08384v1"
+    },
+    {
+      "qid": "paper_17",
+      "query": "genome wide association study oral cancer india",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 926.5,
+      "top_url": "https://doi.org/10.1101/2025.04.16.25325815"
+    },
+    {
+      "qid": "paper_18",
+      "query": "covid vaccine effectiveness against JN.1 hospitalisation",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 961.5,
+      "top_url": "https://doi.org/10.1101/2025.05.02.25326904"
+    },
+    {
+      "qid": "paper_19",
+      "query": "metatarsal bone stress injury in runners",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 1044.7,
+      "top_url": "https://doi.org/10.1101/2025.03.04.25323333"
+    },
+    {
+      "qid": "paper_20",
+      "query": "LLM flight planning with RAG memory for eVTOL",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 992.4,
+      "top_url": "http://arxiv.org/abs/2607.06964v1"
+    },
+    {
+      "qid": "wiki_01",
+      "query": "DPLL algorithm boolean satisfiability",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 924.7,
+      "top_url": "https://en.wikipedia.org/?curid=2745094"
+    },
+    {
+      "qid": "wiki_02",
+      "query": "moravec's paradox easy for humans hard for computers",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 831.7,
+      "top_url": "https://en.wikipedia.org/?curid=12476035"
+    },
+    {
+      "qid": "wiki_03",
+      "query": "mcculloch pitts logical calculus of nervous activity",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 945.5,
+      "top_url": "https://en.wikipedia.org/?curid=78113392"
+    },
+    {
+      "qid": "wiki_04",
+      "query": "brain implant neural device",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 755.7,
+      "top_url": "https://en.wikipedia.org/?curid=1894504"
+    },
+    {
+      "qid": "wiki_05",
+      "query": "licklider psychologist computer scientist man-computer symbiosis",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 651.7,
+      "top_url": "https://en.wikipedia.org/?curid=254150"
+    },
+    {
+      "qid": "wiki_06",
+      "query": "gordon pask cybernetics conversation theory",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 750.6,
+      "top_url": "https://en.wikipedia.org/?curid=4848621"
+    },
+    {
+      "qid": "wiki_07",
+      "query": "what is open collaboration",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 901.3,
+      "top_url": "https://en.wikipedia.org/?curid=41844429"
+    },
+    {
+      "qid": "wiki_08",
+      "query": "google developer expert program",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 1062.1,
+      "top_url": "https://en.wikipedia.org/?curid=42688812"
+    },
+    {
+      "qid": "wiki_09",
+      "query": "MIT 100k entrepreneurship competition",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 741.3,
+      "top_url": "https://en.wikipedia.org/?curid=30865307"
+    },
+    {
+      "qid": "wiki_10",
+      "query": "kanaka rajan computational neuroscientist",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 850.2,
+      "top_url": "https://en.wikipedia.org/?curid=63942267"
+    },
+    {
+      "qid": "rfc_01",
+      "query": "authenticated denial of existence in DNS",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 974.2,
+      "top_url": "https://datatracker.ietf.org/doc/rfc7129/"
+    },
+    {
+      "qid": "rfc_02",
+      "query": "RDAP object tagging authoritative server",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 996.2,
+      "top_url": "https://datatracker.ietf.org/doc/rfc8521/"
+    },
+    {
+      "qid": "rfc_03",
+      "query": "YANG modules for TCP client and server configuration",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 1090.4,
+      "top_url": "https://datatracker.ietf.org/doc/rfc9643/"
+    },
+    {
+      "qid": "rfc_04",
+      "query": "EAP identity selection hints access network",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 1057.6,
+      "top_url": "https://datatracker.ietf.org/doc/rfc4284/"
+    },
+    {
+      "qid": "rfc_05",
+      "query": "realm specific IP protocol specification",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 845.7,
+      "top_url": "https://datatracker.ietf.org/doc/rfc3103/"
+    },
+    {
+      "qid": "rfc_06",
+      "query": "router advertisement flag for DHCPv6 prefix delegation",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 1025.1,
+      "top_url": "https://datatracker.ietf.org/doc/rfc9762/"
+    },
+    {
+      "qid": "rfc_07",
+      "query": "rapid acquisition of multicast RTP sessions",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 737.0,
+      "top_url": "https://datatracker.ietf.org/doc/rfc6659/"
+    },
+    {
+      "qid": "rfc_08",
+      "query": "URN namespace for sources of law",
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "recall": 1.0,
+      "ms": 758.6,
+      "top_url": "https://datatracker.ietf.org/doc/rfc9676/"
+    }
+  ]
+}

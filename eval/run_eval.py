@@ -1,5 +1,4 @@
 """
-Eval harness: run labeled queries through the search pipeline, score results.
 
 Usage (from backend/ so index paths resolve):
     cd backend
@@ -11,7 +10,6 @@ Metrics:
     MRR@10    - reciprocal rank of first relevant result
     recall@30 - did relevant doc survive retrieval+fusion (pre-rerank pool)
 
-Imports the pipeline directly from main.py — no server needed.
 """
 
 import argparse
@@ -19,6 +17,7 @@ import json
 import math
 import os
 import sys
+import time
 from datetime import datetime, timezone
 
 EVAL_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -39,9 +38,9 @@ def normalize_url(url: str) -> str:
     return url.rstrip("/").split("#")[0]
 
 
-def load_queries():
+def load_queries(path):
     queries = []
-    with open(QUERIES_FILE, "r", encoding="utf-8") as f:
+    with open(path, "r", encoding="utf-8") as f:
         for line in f:
             line = line.strip()
             if line:
@@ -77,6 +76,8 @@ def recall(candidate_urls, relevant):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--tag", default=None, help="label for this run (e.g. baseline)")
+    parser.add_argument("--queries", default=QUERIES_FILE, help="path to queries jsonl")
+
     args = parser.parse_args()
 
     # Import the pipeline from backend/main.py (loads indexes + models once)
@@ -85,13 +86,15 @@ def main():
     print("Loading search pipeline (indexes + models)...")
     from main import run_search, RERANK_POOL  # noqa: E402
 
-    queries = load_queries()
+    queries = load_queries(args.queries)
     print(f"Running {len(queries)} queries...\n")
 
     per_query = []
     for i, q in enumerate(queries, 1):
         relevant = {normalize_url(u) for u in q["relevant_urls"]}
+        t0 = time.perf_counter()
         results, candidate_urls = run_search(q["query"], final_k=K_FINAL)
+        row_ms = (time.perf_counter() - t0) * 1000
 
         result_urls = [normalize_url(r["url"]) for r in results]
         cand_urls = {normalize_url(u) for u in candidate_urls}
@@ -102,6 +105,7 @@ def main():
             "ndcg": ndcg_at_k(result_urls, relevant, K_FINAL),
             "mrr": mrr_at_k(result_urls, relevant, K_FINAL),
             "recall": recall(cand_urls, relevant),
+            "ms": round(row_ms, 1),
             "top_url": results[0]["url"] if results else None,
         }
         per_query.append(row)
@@ -122,6 +126,12 @@ def main():
     print("-" * 52)
     for metric, score in summary.items():
         print(f"{metric:<12} {score:>8.4f}")
+    times = sorted(r["ms"] for r in per_query)
+    lat = {"p50": times[len(times) // 2],
+           "p95": times[min(int(len(times) * 0.95), len(times) - 1)],
+           "max": times[-1]}
+    summary["latency_ms"] = lat
+    print(f"{'latency ms':<12} p50={lat['p50']:.0f} p95={lat['p95']:.0f} max={lat['max']:.0f}")
     print("=" * 52)
 
     # Failure buckets

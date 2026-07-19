@@ -23,6 +23,27 @@ def tokenize(text: str) -> list[str]:
 # BM25 (Okapi BM25)
 # ---------------------------------------------------------
 class BM25:
+    def build_postings(self):
+        """Inverted index: word -> list[(chunk_id, freq)]. Call once after load."""
+        self.postings: dict[str, list[tuple[int, int]]] = {}
+        for i, freq in enumerate(self.doc_freqs):
+            for word, f in freq.items():
+                self.postings.setdefault(word, []).append((i, f))
+
+    def get_scores_sparse(self, query_string: str) -> dict[int, float]:
+        """BM25 scores only for chunks containing >=1 query term."""
+        scores: dict[int, float] = {}
+        for word in tokenize(query_string):
+            idf = self.idf.get(word)
+            if idf is None:
+                continue
+            for i, word_freq in self.postings.get(word, ()):
+                denom = word_freq + self.k1 * (
+                    1 - self.b + self.b * (self.doc_lengths[i] / self.avgdl)
+                )
+                scores[i] = scores.get(i, 0.0) + idf * word_freq * (self.k1 + 1) / denom
+        return scores
+
     
 
     def __init__(self, corpus: list[str], k1: float = 1.5, b: float = 0.75):
