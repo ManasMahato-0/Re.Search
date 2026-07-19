@@ -1,10 +1,10 @@
-# Hybrid Search Engine v1.0
+# Hybrid Search Engine v2.0
 
-A modern hybrid search engine that combines traditional Information Retrieval techniques with semantic vector search to provide more relevant search results.
+A hybrid search engine combining lexical and semantic retrieval: **BM25** over an inverted index, **dense embeddings** via FAISS, **weighted Reciprocal Rank Fusion**, and **cross-encoder reranking** — with a measurement-driven eval harness that guided every architecture decision.
 
-The engine performs retrieval using **BM25** and **dense embeddings**, merges both candidate sets using **Reciprocal Rank Fusion (RRF)**, and reranks the final results using a **Cross-Encoder** to improve ranking quality.
+Built from scratch to understand modern search architecture component by component, rather than relying on existing search frameworks.
 
-This project was built to explore modern search engine architecture from scratch while understanding the reasoning behind each retrieval component rather than relying solely on existing search frameworks.
+**Live demo:** _[add your Space / Vercel URLs here]_
 
 ---
 
@@ -12,60 +12,72 @@ This project was built to explore modern search engine architecture from scratch
 
 ### Lexical Retrieval
 
-- BM25 Ranking
-- Custom tokenizer
-- Stopword removal
+- Okapi BM25 with inverted-index (postings) scoring — only chunks containing query terms are scored
+- Custom tokenizer with stopword removal
 - Title-aware indexing
 
 ### Semantic Retrieval
 
 - BAAI/bge-small-en-v1.5 embeddings
-- FAISS vector index
-- Cosine similarity search
+- FAISS vector index, cosine similarity
+- Similarity-cutoff noise filter
 
-### Hybrid Retrieval
+### Hybrid Ranking
 
-- Reciprocal Rank Fusion (RRF)
-- Cross-Encoder reranking
+- Weighted Reciprocal Rank Fusion (RRF) across engines and query variants
+- Title-aware cross-encoder reranking (BAAI/bge-reranker-v2-m3, fp16 on GPU)
 - Query-aware snippet generation
 
-### Backend
+### Query Expansion (experimental, off by default)
 
-- FastAPI REST API
+- Local LLM (Qwen2.5-1.5B-Instruct) rewrites queries: acronym expansion, typo fixes, concept naming
+- Multi-query retrieval fused with weighted RRF; original query always anchors
+- Disk-cached expansions
+- Measured on the eval sets: bridges retrieval vocab gaps but gains were erased at the rerank stage — disabled by default (`QUERY_EXPANSION=1` re-enables)
 
-### Frontend
+### Evaluation Harness
 
-- React
-- TailwindCSS
+- nDCG@10, MRR@10, recall@pool, latency percentiles
+- Easy set (63 queries) + adversarial hard set (20 queries: typos, acronyms, indirect concept queries)
+- Per-query failure buckets: retrieval misses vs ranking misses
+- Tagged, persisted runs for regression tracking
 
 ---
 
 # Retrieval Pipeline
 
 ```
-                    Documents
-                         │
-                Document Processing
-                         │
-            Chunking + Tokenization
-                         │
-        ┌────────────────┴────────────────┐
-        │                                 │
-   BM25 Lexical Index              Dense Embeddings
-        │                                 │
-        │                           FAISS Index
-        └───────────────┬─────────────────┘
+                     Query
+                       │
+        ┌── (optional) LLM query expansion ──┐
+        │                                    │
+        ▼                                    ▼
+   BM25 inverted index              FAISS cosine search
+        │                                    │
+        └───────────────┬────────────────────┘
                         │
-             Candidate Retrieval
+          Weighted Reciprocal Rank Fusion
                         │
-        Reciprocal Rank Fusion (RRF)
+              Chunk → document collapse
                         │
-          Cross-Encoder Reranking
+       Cross-encoder rerank (title + chunk)
                         │
-          Query-aware Snippets
+             Query-aware snippets
                         │
-                 Search Results
+                 Search results
 ```
+
+---
+
+# Eval Results
+
+| metric | easy (63 q) | hard (20 q) |
+|--------|------------|-------------|
+| nDCG@10 | 0.95 | 0.69 |
+| MRR@10 | 0.93 | 0.65 |
+| recall@30 | 1.00 | 0.85 |
+
+Hard-set queries include deliberate typos ("kubernets", "distrbuted"), bare acronyms ("rmsle metric"), and indirect concept descriptions ("why robots bad at easy things").
 
 ---
 
@@ -73,177 +85,92 @@ This project was built to explore modern search engine architecture from scratch
 
 ## Version 0.1
 
-Initial proof of concept.
-
-Implemented
-
-- BM25 lexical retrieval
-- SentenceTransformer embeddings
-- FAISS vector search
-- Basic hybrid score fusion
-- FastAPI backend
-
-Although functional, retrieval quality was inconsistent and several limitations became apparent.
-
----
+Proof of concept: BM25 + SentenceTransformer embeddings + basic score fusion, FastAPI backend.
 
 ## Version 1.0
 
-Major retrieval improvements.
+Retrieval quality: BGE embeddings, chunk-based indexing with overlap, title-aware indexing, RRF fusion, cross-encoder reranking, query-aware snippets.
 
-Added
+## Version 2.0
 
-- BAAI BGE retrieval embeddings
-- Cosine similarity search
-- Chunk-based indexing
-- Overlapping chunks
-- Title-aware indexing
-- Shared tokenizer
-- URL deduplication
-- Reciprocal Rank Fusion (RRF)
-- Cross-Encoder reranking
-- Query-aware snippet generation
-- Modular code structure
+Measurement-driven improvements:
 
-These improvements significantly improved retrieval quality while keeping the system lightweight enough to run on consumer hardware.
+- **Eval harness** with easy + adversarial hard query sets — every change below was accepted or rejected on measured nDCG/MRR/recall deltas
+- **Title-aware reranking** — cross-encoder scores `title + chunk` pairs; page identity was previously invisible to the reranker
+- **Reranker upgrade** to bge-reranker-v2-m3 (fp16, GPU) — the single largest quality win (hard nDCG 0.61 → 0.69)
+- **Inverted-index BM25** — postings-based sparse scoring replaces full-corpus scans
+- **LLM query expansion** — built, measured, and honestly parked: retrieval recall improved but final ranking didn't, so it ships disabled behind an env flag
+- **Deploy support** — Dockerfile for Hugging Face Spaces (CPU deploy profile via env knobs), configurable frontend API URL
 
 ---
 
 # Tech Stack
 
-## Backend
-
-- Python
-- FastAPI
-
-## Retrieval
-
-- BM25
-- FAISS
-- SentenceTransformers
-- BAAI/bge-small-en-v1.5
-- CrossEncoder (MS MARCO MiniLM)
-
-## Frontend
-
-- React
-- TailwindCSS
-
-## Crawling
-
-- Scrapy
+**Backend:** Python, FastAPI, Uvicorn
+**Retrieval:** BM25 (custom), FAISS, SentenceTransformers, BAAI/bge-small-en-v1.5, BAAI/bge-reranker-v2-m3
+**Query expansion:** Transformers, Qwen2.5-1.5B-Instruct (optional)
+**Frontend:** React, TailwindCSS
+**Crawling:** Scrapy
+**Eval:** custom harness (nDCG / MRR / recall / latency)
 
 ---
 
 # Project Structure
 
 ```
-Hybrid-Search-Engine/
-
+Search-Engine/
 │
 ├── backend/
-│   │
 │   ├── data/
-│   ├── bm25.py
-│   ├── indexer.py
-│   ├── main.py
+│   ├── bm25.py               # BM25 + inverted index
+│   ├── indexer.py            # builds bm25_index.pkl + vector_index.faiss
+│   ├── main.py               # FastAPI app + retrieval pipeline
+│   ├── query_expansion.py    # optional LLM multi-query expansion
 │   ├── requirements.txt
-│   ├── vector_index.faiss   (generated locally — not in repo)
-│   └── bm25_index.pkl       (generated locally — not in repo)
+│   ├── vector_index.faiss    (generated locally — not in repo)
+│   └── bm25_index.pkl        (generated locally — not in repo)
 │
-├── crawler/
-│   │
-│   ├── crawler/
-│   ├── docs_ingester.py
-│   ├── docs_data.json
-│   ├── papers_data.json
-│   └── scrapy.cfg
+├── crawler/                  # Scrapy spiders + bulk ingester
+├── eval/
+│   ├── run_eval.py           # eval harness
+│   ├── queries.jsonl         # easy set
+│   ├── queries_hard.jsonl    # adversarial set
+│   └── results/              # tagged runs
 │
-├── frontend/
-│
-├── README.md
-│
-└── .gitignore
+├── frontend/                 # React + Tailwind UI
+├── Dockerfile                # HF Spaces CPU deploy
+└── README.md
 ```
 
 ---
 
 # Getting Started
 
-Clone the repository
-
 ```bash
 git clone https://github.com/<your-username>/<repo-name>.git
-
 cd <repo-name>
-```
 
-Install backend dependencies
-
-```bash
+# backend deps
 cd backend
-
 pip install -r requirements.txt
-```
 
-Install frontend dependencies
-
-```bash
+# frontend deps
 cd ../frontend
-
 npm install
 ```
 
 ---
 
-# Running
+# Building the Indexes
 
-> **Note:** Build the search indexes first — see [Dataset & Indexes](#dataset--indexes).
+The backend will not start without the indexes (too large for the repo — see `.gitignore`).
 
-Backend
-
-```bash
-cd backend
-
-uvicorn main:app --reload
-```
-
-Frontend
-
-```bash
-cd frontend
-
-npm run dev
-```
-
----
-
-# Dataset & Indexes
-
-## What is excluded from the repository
-
-The following files exceed GitHub's file size limits and are **not** included in this repository (see `.gitignore`):
-
-| File | Size | Purpose |
-|------|------|---------|
-| `backend/bm25_index.pkl` | ~271 MB | BM25 lexical index |
-| `backend/vector_index.faiss` | ~131 MB | FAISS dense vector index |
-| `backend/data/crawler_dataset.jsonl` | ~72 MB | Crawled documents dataset |
-
-The repository **does** include `backend/data/research_dataset.json` (~22 MB), so the engine can be bootstrapped from it alone.
-
-## How to build the indexes before running
-
-The backend will not start without the indexes. After installing dependencies, generate them:
-
-1. (Optional) Build a larger dataset — fetch documents from arXiv, OpenAlex, Wikipedia, StackExchange, W3C/RFC:
+1. (Optional) Build a larger dataset — arXiv, OpenAlex, Wikipedia, StackExchange, W3C/RFC:
 
    ```bash
    cd crawler
    python bulk_ingester.py
    ```
-
-   You can also run the Scrapy spiders to produce `backend/data/crawler_dataset.jsonl`. If this file is missing, the indexer simply skips it.
 
 2. Build the BM25 and FAISS indexes (required):
 
@@ -252,37 +179,75 @@ The backend will not start without the indexes. After installing dependencies, g
    python indexer.py
    ```
 
-   This reads the datasets in `backend/data/` and produces `bm25_index.pkl` and `vector_index.faiss`. The first run also downloads the embedding model (BAAI/bge-small-en-v1.5).
+   Reads datasets in `backend/data/`, produces `bm25_index.pkl` and `vector_index.faiss`. First run downloads the embedding model.
 
-3. Start the backend as described in the [Running](#running) section.
-
-Re-run `python indexer.py` whenever documents are added or the retrieval pipeline changes.
+Re-run `indexer.py` whenever documents are added.
 
 ---
 
-# Current Capabilities
+# Running
 
-- Hybrid lexical + semantic retrieval
-- Dense vector search
-- Candidate fusion
-- Cross-encoder reranking
-- Query-aware snippets
-- Chunk-based indexing
-- REST API
+Backend:
+
+```bash
+cd backend
+uvicorn main:app --reload
+```
+
+Frontend:
+
+```bash
+cd frontend
+npm run dev
+```
+
+Point the frontend at a non-local backend with `VITE_API_URL`.
 
 ---
 
-# Future Improvements
+# Evaluation
 
-This project is still actively under development.
+```bash
+cd backend
+python ../eval/run_eval.py                                       # easy set
+python ../eval/run_eval.py --queries ../eval/queries_hard.jsonl  # hard set
+python ../eval/run_eval.py --tag my-experiment                   # tagged run
+```
 
-Future versions aim to improve retrieval quality, scalability and search efficiency through more advanced indexing techniques and modern Information Retrieval algorithms.
+Results persist to `eval/results/` as JSON with per-query breakdowns.
 
 ---
 
-# Screenshots
+# Configuration
 
-_Coming soon_
+Environment knobs (defaults target local GPU dev):
+
+| var | default | purpose |
+|-----|---------|---------|
+| `RERANKER_MODEL` | BAAI/bge-reranker-v2-m3 | cross-encoder model |
+| `DEVICE` | cuda | reranker device |
+| `RERANK_POOL` | 30 | docs rescored by cross-encoder |
+| `QUERY_EXPANSION` | 0 | enable LLM multi-query expansion |
+| `MIN_COSINE_SIM` | 0.4 | FAISS similarity cutoff |
+
+The Dockerfile ships a CPU profile (bge-reranker-base, pool 15) for free-tier hosting.
+
+---
+
+# Deployment (free tier)
+
+**Backend — Hugging Face Spaces (Docker SDK):**
+
+1. Create a Space, Docker SDK, CPU basic (free)
+2. Copy `Dockerfile`, `backend/*.py`, `backend/requirements.txt`, and both index files into the Space repo
+3. `git lfs track "*.pkl" "*.faiss"` before committing the indexes
+4. Push — the image build pre-downloads models, so cold boots are fast
+5. API serves at `https://<user>-<space>.hf.space/search?q=...`
+
+**Frontend — Vercel:**
+
+1. Import the GitHub repo, root directory `frontend`
+2. Set `VITE_API_URL` to the Space URL
 
 ---
 

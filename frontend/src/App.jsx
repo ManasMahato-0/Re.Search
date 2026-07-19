@@ -23,7 +23,8 @@ export default function App() {
     
     try {
       // Calls Python backend
-      const response = await fetch(`http://localhost:8000/search?q=${encodeURIComponent(q)}`);
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+      const response = await fetch(`${API_URL}/search?q=${encodeURIComponent(q)}`);
       const data = await response.json();
       if (data.status === 'success') {
         setResults(data.results);

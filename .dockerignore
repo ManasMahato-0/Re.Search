@@ -1,0 +1,8 @@
+venv/
+frontend/
+crawler/
+eval/
+.git/
+**/__pycache__/
+backend/expansion_cache.json
+backend/data/

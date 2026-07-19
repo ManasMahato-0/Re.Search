@@ -1,0 +1,2 @@
+backend/*.pkl filter=lfs diff=lfs merge=lfs -text
+backend/*.faiss filter=lfs diff=lfs merge=lfs -text

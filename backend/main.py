@@ -25,7 +25,8 @@ EXPANSION_WEIGHT = 0.4 # ranked lists from LLM query variants count this much
                        # relative to the original query's lists
 QUERY_EXPANSION =os.environ.get("QUERY_EXPANSION", "0") == "1"
                        # the stronger signal; tune per taste.
-RERANK_POOL = 30      # how many fused docs the cross-encoder rescores
+RERANK_POOL = int(os.environ.get("RERANK_POOL", 30))
+                       # how many fused docs the cross-encoder rescores
 FINAL_RESULTS = 10     # how many results the API returns
 EXPANSION_TRIGGER = 999
 
@@ -62,7 +63,13 @@ model = SentenceTransformer("BAAI/bge-small-en-v1.5")
 BGE_QUERY_PREFIX = "Represent this sentence for searching relevant passages: "
 
 
-reranker = CrossEncoder("BAAI/bge-reranker-v2-m3", device="cuda", model_kwargs={"dtype": "float16"})
+RERANKER_MODEL = os.environ.get("RERANKER_MODEL", "BAAI/bge-reranker-v2-m3")
+DEVICE = os.environ.get("DEVICE", "cuda")
+reranker = CrossEncoder(
+    RERANKER_MODEL,
+    device=DEVICE,
+    model_kwargs={"dtype": "float16"} if DEVICE == "cuda" else {},
+)
 
 
 print("Server initialization complete. Ready to serve traffic.")
