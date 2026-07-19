@@ -24,8 +24,25 @@ export default function App() {
     try {
       // Calls Python backend
       const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
-      const response = await fetch(`${API_URL}/search?q=${encodeURIComponent(q)}`);
-      const data = await response.json();
+      let data;
+      if (API_URL.includes(".hf.space")) {
+        // Gradio API: POST returns event_id, then poll the event stream
+        const call = await fetch(`${API_URL}/gradio_api/call/search`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ data: [q] }),
+        });
+        const { event_id } = await call.json();
+        const stream = await fetch(`${API_URL}/gradio_api/call/search/${event_id}`);
+        const text = await stream.text();
+        // SSE format: last "data:" line holds the JSON payload array
+        const dataLine = text.split("\n").filter(l => l.startsWith("data:")).pop();
+        data = JSON.parse(dataLine.slice(5))[0];
+      } else {
+        // Local FastAPI backend
+        const response = await fetch(`${API_URL}/search?q=${encodeURIComponent(q)}`);
+        data = await response.json();
+      }
       if (data.status === 'success') {
         setResults(data.results);
       }
