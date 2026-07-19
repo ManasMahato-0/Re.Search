@@ -22,29 +22,22 @@ export default function App() {
     setHasSearched(true);
     
     try {
-      // Calls Python backend
-      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
-      let data;
-      if (API_URL.includes(".hf.space")) {
-        // Gradio API: POST returns event_id, then poll the event stream
-        const call = await fetch(`${API_URL}/gradio_api/call/search`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ data: [q] }),
-        });
-        const { event_id } = await call.json();
-        const stream = await fetch(`${API_URL}/gradio_api/call/search/${event_id}`);
-        const text = await stream.text();
-        // SSE format: last "data:" line holds the JSON payload array
-        const dataLine = text.split("\n").filter(l => l.startsWith("data:")).pop();
-        data = JSON.parse(dataLine.slice(5))[0];
-      } else {
-        // Local FastAPI backend
-        const response = await fetch(`${API_URL}/search?q=${encodeURIComponent(q)}`);
-        data = await response.json();
-      }
+      // Same-origin serverless proxy (frontend/api/search.js) — holds the
+      // HF token server-side and talks to the Space's Gradio API for us.
+      // Falls back to a local FastAPI backend during development.
+      const API_URL = import.meta.env.VITE_API_URL || "";
+      const base = API_URL || "";
+      const response = await fetch(
+        base
+          ? `${base}/search?q=${encodeURIComponent(q)}`
+          : `/api/search?q=${encodeURIComponent(q)}`
+      );
+      const data = await response.json();
       if (data.status === 'success') {
         setResults(data.results);
+      } else {
+        console.error("Search failed:", data.message || data);
+        setResults([]);
       }
     } catch (error) {
       console.error("Search failed:", error);
