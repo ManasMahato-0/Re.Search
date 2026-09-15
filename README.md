@@ -4,7 +4,7 @@ A hybrid search engine combining lexical and semantic retrieval: **BM25** over a
 
 Built from scratch to understand modern search architecture component by component, rather than relying on existing search frameworks.
 
-**Live demo:** _[add your Space / Vercel URLs here]_
+**Live demo:** [Frontend (Vercel)](https://re-search-ten.vercel.app/) · [Backend (HF Space)](https://huggingface.co/spaces/TheArchimedes/re-search)
 
 ---
 

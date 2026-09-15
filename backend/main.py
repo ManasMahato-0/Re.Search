@@ -8,9 +8,10 @@ from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 from sentence_transformers import SentenceTransformer, CrossEncoder
 from query_expansion import expand_query
+from cache import cache_get, cache_set
 
 
-from bm25 import BM25, tokenize  
+from bm25 import BM25, tokenize
 
 # ---------------------------------------------------------
 # TUNING KNOBS
@@ -215,7 +216,17 @@ def run_search(q: str, final_k: int = FINAL_RESULTS):
 # ---------------------------------------------------------
 @app.get("/search")
 def search(q: str = Query(..., min_length=1)):
+    cached = cache_get(q)
+    if cached is not None:
+        return {
+            "status": "success",
+            "query": q,
+            "results": cached,
+            "cached": True,
+        }
+
     top_results, _ = run_search(q)
+    cache_set(q, top_results)
     return {
         "status": "success",
         "query": q,

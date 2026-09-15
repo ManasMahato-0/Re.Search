@@ -1,0 +1,7 @@
+torch
+sentence-transformers
+faiss-cpu
+numpy
+fastapi
+gradio
+spaces
